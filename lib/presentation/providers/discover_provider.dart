@@ -13,7 +13,7 @@ class DiscoverProvider extends ChangeNotifier {
       (video) => VideoPostModel.fromJson(video).toVideoPostEntity()
     ).toList();
     videos.addAll(newVideos);
-  initialLoading = false;
+    initialLoading = false;
     notifyListeners();
   }
 
