@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toktik/config/theme/app_theme.dart';
+import 'package:toktik/presentation/screens/discover.dart';
 
 void main(){
   runApp(const MyApp());
@@ -13,11 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme().getTheme(),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Toktik'),
-        ),
-      ),
+      home: const Discover()
     );
   }
 }
