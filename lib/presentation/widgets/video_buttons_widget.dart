@@ -14,15 +14,14 @@ class VideoButtonsWidget extends StatelessWidget {
       children: [
         _ButtonIconVideo(
           value: '${video.likes}',
-          icon: Icons.favorite,
-          color: Colors.white,
+          iconType: Icons.favorite,
+          color: Colors.red,
           onPressedAction: () {
           },
         ),
         _ButtonIconVideo(
           value: '${video.views}',
-          icon: Icons.remove_red_eye,
-          color: Colors.white,
+          iconType: Icons.remove_red_eye,
           onPressedAction: () {
           },
         )
@@ -34,14 +33,15 @@ class VideoButtonsWidget extends StatelessWidget {
 class _ButtonIconVideo extends StatelessWidget {
   const _ButtonIconVideo({
     required this.value,
-    required this.icon,
-    required this.color,
-    required this.onPressedAction
-  });
+    required this.iconType,
+    required this.onPressedAction,
+    color,
+  }) :
+    iconColor = color ?? Colors.white;
 
   final String value;
-  final IconData icon;
-  final Color color;
+  final IconData iconType;
+  final Color iconColor;
   final VoidCallback? onPressedAction;
 
   @override
@@ -50,7 +50,11 @@ class _ButtonIconVideo extends StatelessWidget {
       children: [
         IconButton(
           onPressed: onPressedAction ,
-          icon: Icon(icon, color: color,)
+          icon: Icon(
+            iconType,
+            color: iconColor,
+            size: 30,
+          )
         ),
         Text(value)
       ],
