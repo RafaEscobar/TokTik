@@ -21,14 +21,14 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset(widget.videoUrl)
+    controller = VideoPlayerController.asset( widget.videoUrl )
       ..setVolume(0)
       ..setLooping(true)
       ..play();
   }
 
   @override
-  void dispose(){
+  void dispose() {
     controller.dispose();
     super.dispose();
   }
@@ -45,9 +45,37 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
         }
         return AspectRatio(
           aspectRatio: controller.value.aspectRatio,
-          child: VideoPlayer(controller),
+          child: Stack(children: [
+            VideoPlayer(controller),
+            // Gradiante
+            Positioned(
+              bottom: 30,
+              left: 30,
+              child: _VideoDescription(description: widget.videoDescription)
+            )
+          ],),
         );
       },
+    );
+  }
+}
+
+class _VideoDescription extends StatelessWidget {
+  final String description;
+  const _VideoDescription({
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context){
+    Size size = MediaQuery.of(context).size;
+    return SizedBox(
+      width: size.width * .7,
+      child: Text(
+        description,
+        maxLines: 2,
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
     );
   }
 }

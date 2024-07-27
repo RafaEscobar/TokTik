@@ -16,11 +16,11 @@ class VideoScrollableWidget extends StatelessWidget{
     return PageView.builder(
       scrollDirection: Axis.vertical,
       physics: const BouncingScrollPhysics(),
+      itemCount: videos.length,
       itemBuilder: (context, index) {
         final VideoPost dataVideo = videos[index];
         return Stack(
           children: [
-            // Video + gradiante
             SizedBox.expand(
               child: FullscreenPlayer(
                 videoUrl: dataVideo.videoUrl,
