@@ -49,7 +49,9 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
             aspectRatio: controller.value.aspectRatio,
             child: Stack(children: [
               VideoPlayer(controller),
-              // Gradiante
+              _VideoGradient(
+                gradientStops: const [0.8, 1.0],
+              ),
               Positioned(
                 bottom: 30,
                 left: 30,
@@ -79,6 +81,34 @@ class _VideoDescription extends StatelessWidget {
         maxLines: 2,
         style: Theme.of(context).textTheme.titleMedium,
       ),
+    );
+  }
+}
+
+class _VideoGradient extends StatelessWidget {
+  final List<Color> gradientColors;
+  final List<double> gradientStops;
+  const _VideoGradient({
+    this.gradientColors = const [
+      Colors.transparent,
+      Colors.black87
+    ],
+    this.gradientStops = const[0.0, 1.0],
+  }) : assert(gradientColors.length==gradientStops.length, 'La cantidad de stops debe ser igual a la de colores');
+
+  @override
+  Widget build(BuildContext context){
+    return Positioned.fill(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: gradientColors,
+            stops: gradientStops,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter
+          )
+        ),
+      )
     );
   }
 }
