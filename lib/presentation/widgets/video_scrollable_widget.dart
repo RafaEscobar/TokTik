@@ -1,5 +1,6 @@
 import 'package:toktik/domain/entities/video_post.dart';
 import 'package:flutter/material.dart';
+import 'package:toktik/presentation/widgets/fullscreen_player.dart';
 import 'package:toktik/presentation/widgets/video_buttons_widget.dart';
 
 class VideoScrollableWidget extends StatelessWidget{
@@ -15,12 +16,17 @@ class VideoScrollableWidget extends StatelessWidget{
     return PageView.builder(
       scrollDirection: Axis.vertical,
       physics: const BouncingScrollPhysics(),
+      itemCount: videos.length,
       itemBuilder: (context, index) {
         final VideoPost dataVideo = videos[index];
         return Stack(
           children: [
-            // Video + gradiante
-
+            SizedBox.expand(
+              child: FullscreenPlayer(
+                videoUrl: dataVideo.videoUrl,
+                videoDescription: dataVideo.videoDescription,
+              ),
+            ),
             // Bottons
             Positioned(
               bottom: 30,

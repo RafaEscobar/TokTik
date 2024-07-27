@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toktik/domain/entities/video_post.dart';
+import 'package:toktik/domain/helpers/number_formats.dart';
+import 'package:animate_do/animate_do.dart';
 
 class VideoButtonsWidget extends StatelessWidget {
   const VideoButtonsWidget({
@@ -13,17 +15,29 @@ class VideoButtonsWidget extends StatelessWidget {
     return Column(
       children: [
         _ButtonIconVideo(
-          value: '${video.likes}',
+          value: NumberFormats.abbreviatedAmount(video.likes.toDouble()),
           iconType: Icons.favorite,
           color: Colors.red,
           onPressedAction: () {
           },
         ),
+        const SizedBox(height: 8,),
         _ButtonIconVideo(
-          value: '${video.views}',
+          value: NumberFormats.abbreviatedAmount(video.views.toDouble()),
           iconType: Icons.remove_red_eye,
           onPressedAction: () {
           },
+        ),
+        const SizedBox(height: 8,),
+        SpinPerfect(
+          infinite: true,
+          duration: const Duration(seconds: 3),
+          child: _ButtonIconVideo(
+            value: '0',
+            iconType: Icons.music_note,
+            onPressedAction: () {
+            },
+          )
         )
       ],
     );
@@ -56,7 +70,9 @@ class _ButtonIconVideo extends StatelessWidget {
             size: 30,
           )
         ),
-        Text(value)
+        (value != '0') ?
+          Text(value) :
+          Container()
       ],
     );
   }
