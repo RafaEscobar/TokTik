@@ -41,3 +41,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#Data
+/assets/
+
+# Plataforms
+/linux
+/macos
+/web
+/windows
+/iosuntracked_directory/
