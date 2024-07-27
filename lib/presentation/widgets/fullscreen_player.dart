@@ -43,17 +43,20 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
             child: CircularProgressIndicator(strokeWidth: 2,),
           );
         }
-        return AspectRatio(
-          aspectRatio: controller.value.aspectRatio,
-          child: Stack(children: [
-            VideoPlayer(controller),
-            // Gradiante
-            Positioned(
-              bottom: 30,
-              left: 30,
-              child: _VideoDescription(description: widget.videoDescription)
-            )
-          ],),
+        return GestureDetector(
+          onTap: () => (controller.value.isPlaying) ? controller.pause() : controller.play(),
+          child: AspectRatio(
+            aspectRatio: controller.value.aspectRatio,
+            child: Stack(children: [
+              VideoPlayer(controller),
+              // Gradiante
+              Positioned(
+                bottom: 30,
+                left: 30,
+                child: _VideoDescription(description: widget.videoDescription)
+              )
+            ],),
+          ),
         );
       },
     );
